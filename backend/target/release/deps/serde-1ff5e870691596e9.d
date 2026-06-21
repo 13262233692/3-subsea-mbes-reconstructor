@@ -1,0 +1,14 @@
+D:\SOLO-0621-1\3-subsea-mbes-reconstructor\backend\target\release\deps\serde-1ff5e870691596e9.d: C:\Users\ZhuanZ\.cargo\registry\src\mirrors.aliyun.com-0671735e7cc7f5e7\serde-1.0.228\src\lib.rs C:\Users\ZhuanZ\.cargo\registry\src\mirrors.aliyun.com-0671735e7cc7f5e7\serde-1.0.228\src\integer128.rs C:\Users\ZhuanZ\.cargo\registry\src\mirrors.aliyun.com-0671735e7cc7f5e7\serde-1.0.228\src\private\mod.rs C:\Users\ZhuanZ\.cargo\registry\src\mirrors.aliyun.com-0671735e7cc7f5e7\serde-1.0.228\src\private\de.rs C:\Users\ZhuanZ\.cargo\registry\src\mirrors.aliyun.com-0671735e7cc7f5e7\serde-1.0.228\src\private\ser.rs D:\SOLO-0621-1\3-subsea-mbes-reconstructor\backend\target\release\build\serde-4bdacb04acc9dbc6\out/private.rs
+
+D:\SOLO-0621-1\3-subsea-mbes-reconstructor\backend\target\release\deps\libserde-1ff5e870691596e9.rlib: C:\Users\ZhuanZ\.cargo\registry\src\mirrors.aliyun.com-0671735e7cc7f5e7\serde-1.0.228\src\lib.rs C:\Users\ZhuanZ\.cargo\registry\src\mirrors.aliyun.com-0671735e7cc7f5e7\serde-1.0.228\src\integer128.rs C:\Users\ZhuanZ\.cargo\registry\src\mirrors.aliyun.com-0671735e7cc7f5e7\serde-1.0.228\src\private\mod.rs C:\Users\ZhuanZ\.cargo\registry\src\mirrors.aliyun.com-0671735e7cc7f5e7\serde-1.0.228\src\private\de.rs C:\Users\ZhuanZ\.cargo\registry\src\mirrors.aliyun.com-0671735e7cc7f5e7\serde-1.0.228\src\private\ser.rs D:\SOLO-0621-1\3-subsea-mbes-reconstructor\backend\target\release\build\serde-4bdacb04acc9dbc6\out/private.rs
+
+D:\SOLO-0621-1\3-subsea-mbes-reconstructor\backend\target\release\deps\libserde-1ff5e870691596e9.rmeta: C:\Users\ZhuanZ\.cargo\registry\src\mirrors.aliyun.com-0671735e7cc7f5e7\serde-1.0.228\src\lib.rs C:\Users\ZhuanZ\.cargo\registry\src\mirrors.aliyun.com-0671735e7cc7f5e7\serde-1.0.228\src\integer128.rs C:\Users\ZhuanZ\.cargo\registry\src\mirrors.aliyun.com-0671735e7cc7f5e7\serde-1.0.228\src\private\mod.rs C:\Users\ZhuanZ\.cargo\registry\src\mirrors.aliyun.com-0671735e7cc7f5e7\serde-1.0.228\src\private\de.rs C:\Users\ZhuanZ\.cargo\registry\src\mirrors.aliyun.com-0671735e7cc7f5e7\serde-1.0.228\src\private\ser.rs D:\SOLO-0621-1\3-subsea-mbes-reconstructor\backend\target\release\build\serde-4bdacb04acc9dbc6\out/private.rs
+
+C:\Users\ZhuanZ\.cargo\registry\src\mirrors.aliyun.com-0671735e7cc7f5e7\serde-1.0.228\src\lib.rs:
+C:\Users\ZhuanZ\.cargo\registry\src\mirrors.aliyun.com-0671735e7cc7f5e7\serde-1.0.228\src\integer128.rs:
+C:\Users\ZhuanZ\.cargo\registry\src\mirrors.aliyun.com-0671735e7cc7f5e7\serde-1.0.228\src\private\mod.rs:
+C:\Users\ZhuanZ\.cargo\registry\src\mirrors.aliyun.com-0671735e7cc7f5e7\serde-1.0.228\src\private\de.rs:
+C:\Users\ZhuanZ\.cargo\registry\src\mirrors.aliyun.com-0671735e7cc7f5e7\serde-1.0.228\src\private\ser.rs:
+D:\SOLO-0621-1\3-subsea-mbes-reconstructor\backend\target\release\build\serde-4bdacb04acc9dbc6\out/private.rs:
+
+# env-dep:OUT_DIR=D:\\SOLO-0621-1\\3-subsea-mbes-reconstructor\\backend\\target\\release\\build\\serde-4bdacb04acc9dbc6\\out

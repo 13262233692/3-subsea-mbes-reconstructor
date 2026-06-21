@@ -1,0 +1,11 @@
+D:\SOLO-0621-1\3-subsea-mbes-reconstructor\backend\target\release\deps\socket2-25077ef8d89aa291.d: C:\Users\ZhuanZ\.cargo\registry\src\mirrors.aliyun.com-0671735e7cc7f5e7\socket2-0.6.4\src\lib.rs C:\Users\ZhuanZ\.cargo\registry\src\mirrors.aliyun.com-0671735e7cc7f5e7\socket2-0.6.4\src\sockaddr.rs C:\Users\ZhuanZ\.cargo\registry\src\mirrors.aliyun.com-0671735e7cc7f5e7\socket2-0.6.4\src\socket.rs C:\Users\ZhuanZ\.cargo\registry\src\mirrors.aliyun.com-0671735e7cc7f5e7\socket2-0.6.4\src\sockref.rs C:\Users\ZhuanZ\.cargo\registry\src\mirrors.aliyun.com-0671735e7cc7f5e7\socket2-0.6.4\src\sys\windows.rs
+
+D:\SOLO-0621-1\3-subsea-mbes-reconstructor\backend\target\release\deps\libsocket2-25077ef8d89aa291.rlib: C:\Users\ZhuanZ\.cargo\registry\src\mirrors.aliyun.com-0671735e7cc7f5e7\socket2-0.6.4\src\lib.rs C:\Users\ZhuanZ\.cargo\registry\src\mirrors.aliyun.com-0671735e7cc7f5e7\socket2-0.6.4\src\sockaddr.rs C:\Users\ZhuanZ\.cargo\registry\src\mirrors.aliyun.com-0671735e7cc7f5e7\socket2-0.6.4\src\socket.rs C:\Users\ZhuanZ\.cargo\registry\src\mirrors.aliyun.com-0671735e7cc7f5e7\socket2-0.6.4\src\sockref.rs C:\Users\ZhuanZ\.cargo\registry\src\mirrors.aliyun.com-0671735e7cc7f5e7\socket2-0.6.4\src\sys\windows.rs
+
+D:\SOLO-0621-1\3-subsea-mbes-reconstructor\backend\target\release\deps\libsocket2-25077ef8d89aa291.rmeta: C:\Users\ZhuanZ\.cargo\registry\src\mirrors.aliyun.com-0671735e7cc7f5e7\socket2-0.6.4\src\lib.rs C:\Users\ZhuanZ\.cargo\registry\src\mirrors.aliyun.com-0671735e7cc7f5e7\socket2-0.6.4\src\sockaddr.rs C:\Users\ZhuanZ\.cargo\registry\src\mirrors.aliyun.com-0671735e7cc7f5e7\socket2-0.6.4\src\socket.rs C:\Users\ZhuanZ\.cargo\registry\src\mirrors.aliyun.com-0671735e7cc7f5e7\socket2-0.6.4\src\sockref.rs C:\Users\ZhuanZ\.cargo\registry\src\mirrors.aliyun.com-0671735e7cc7f5e7\socket2-0.6.4\src\sys\windows.rs
+
+C:\Users\ZhuanZ\.cargo\registry\src\mirrors.aliyun.com-0671735e7cc7f5e7\socket2-0.6.4\src\lib.rs:
+C:\Users\ZhuanZ\.cargo\registry\src\mirrors.aliyun.com-0671735e7cc7f5e7\socket2-0.6.4\src\sockaddr.rs:
+C:\Users\ZhuanZ\.cargo\registry\src\mirrors.aliyun.com-0671735e7cc7f5e7\socket2-0.6.4\src\socket.rs:
+C:\Users\ZhuanZ\.cargo\registry\src\mirrors.aliyun.com-0671735e7cc7f5e7\socket2-0.6.4\src\sockref.rs:
+C:\Users\ZhuanZ\.cargo\registry\src\mirrors.aliyun.com-0671735e7cc7f5e7\socket2-0.6.4\src\sys\windows.rs:

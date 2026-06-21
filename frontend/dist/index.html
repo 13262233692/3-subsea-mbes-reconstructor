@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>深海多波束声呐实时成像工作站 | MBES Real-Time Imaging Workstation</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0a0e1a;
+      --panel-bg: rgba(15, 23, 42, 0.85);
+      --panel-border: rgba(99, 179, 237, 0.25);
+      --accent: #38bdf8;
+      --accent-dim: #0ea5e9;
+      --text: #e0f2fe;
+      --text-dim: #94a3b8;
+      --ok: #4ade80;
+      --warn: #fbbf24;
+      --bad: #f87171;
+      --seep: #fb923c;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    #app { position: fixed; inset: 0; }
+    #canvas-container {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, #0f172a 0%, #020617 80%);
+    }
+    .hud-panel {
+      position: absolute;
+      background: var(--panel-bg);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--panel-border);
+      border-radius: 8px;
+      padding: 14px 18px;
+      pointer-events: auto;
+      font-size: 13px;
+      line-height: 1.5;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+    }
+    #header {
+      top: 16px;
+      left: 16px;
+      right: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+    }
+    #header h1 {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      background: linear-gradient(90deg, var(--accent), #a78bfa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    #header .subtitle {
+      font-size: 11px;
+      color: var(--text-dim);
+      margin-top: 2px;
+    }
+    .status-group {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+    .status-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+    }
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--bad);
+      box-shadow: 0 0 8px currentColor;
+      transition: background 0.3s;
+    }
+    .status-dot.ok { background: var(--ok); }
+    .status-dot.warn { background: var(--warn); animation: pulse 1.5s infinite; }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    #stats {
+      top: 90px;
+      left: 16px;
+      min-width: 260px;
+    }
+    #stats h2, #controls h2, #svp h2, #colorbar h2 {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--panel-border);
+    }
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      margin: 4px 0;
+      font-family: 'SF Mono', 'Consolas', monospace;
+      font-size: 12px;
+    }
+    .stat-row .label { color: var(--text-dim); }
+    .stat-row .value { color: var(--text); font-weight: 500; }
+    #controls {
+      top: 90px;
+      right: 16px;
+      min-width: 280px;
+    }
+    .control-group {
+      margin: 10px 0;
+    }
+    .control-group label {
+      display: block;
+      font-size: 11px;
+      color: var(--text-dim);
+      margin-bottom: 4px;
+    }
+    .control-group input[type="range"] {
+      width: 100%;
+      height: 4px;
+      -webkit-appearance: none;
+      appearance: none;
+      background: rgba(56, 189, 248, 0.2);
+      border-radius: 2px;
+      outline: none;
+    }
+    .control-group input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--accent);
+      cursor: pointer;
+      border: 2px solid #fff;
+    }
+    .control-row {
+      display: flex;
+      gap: 8px;
+      margin: 8px 0;
+    }
+    .control-row button {
+      flex: 1;
+      padding: 6px 10px;
+      font-size: 11px;
+      border: 1px solid var(--panel-border);
+      border-radius: 5px;
+      background: rgba(56, 189, 248, 0.1);
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+    .control-row button:hover {
+      background: rgba(56, 189, 248, 0.25);
+      border-color: var(--accent);
+    }
+    .control-row button.active {
+      background: var(--accent);
+      color: #0c1220;
+      font-weight: 600;
+    }
+    #svp {
+      bottom: 16px;
+      left: 16px;
+      width: 320px;
+      height: 260px;
+    }
+    #svp-canvas {
+      width: 100%;
+      height: 200px;
+      display: block;
+    }
+    #colorbar {
+      bottom: 16px;
+      right: 16px;
+      width: 80px;
+      height: 280px;
+      display: flex;
+      flex-direction: column;
+    }
+    #colorbar h2 {
+      text-align: center;
+    }
+    #colorbar-gradient {
+      flex: 1;
+      width: 28px;
+      margin: 8px auto;
+      border-radius: 4px;
+      border: 1px solid var(--panel-border);
+    }
+    .colorbar-label {
+      font-size: 10px;
+      color: var(--text-dim);
+      text-align: center;
+      padding: 4px 0;
+      font-family: 'SF Mono', monospace;
+    }
+    #minimap {
+      position: absolute;
+      top: 90px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 220px;
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      border-radius: 8px;
+      padding: 10px;
+      pointer-events: none;
+    }
+    #minimap h2 {
+      font-size: 10px;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+    #minimap-canvas {
+      width: 200px;
+      height: 140px;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 4px;
+      display: block;
+    }
+    .seep-indicator {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 3px;
+      font-size: 10px;
+      background: rgba(251, 146, 60, 0.2);
+      color: var(--seep);
+      border: 1px solid rgba(251, 146, 60, 0.3);
+    }
+  </style>
+  <script type="module" crossorigin src="/assets/index-C91EUp_o.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/three-BJrWuYCb.js">
+</head>
+<body>
+  <div id="app">
+    <div id="canvas-container"></div>
+
+    <div id="header" class="hud-panel">
+      <div>
+        <h1>深海多波束声呐实时成像工作站</h1>
+        <div class="subtitle">MBES Real-Time Imaging Workstation · Kongsberg EM302 · Snell's Law Refraction Engine</div>
+      </div>
+      <div class="status-group">
+        <div class="status-item">
+          <span id="ws-dot" class="status-dot"></span>
+          <span id="ws-text">连接中...</span>
+        </div>
+        <div class="status-item">
+          <span id="stream-dot" class="status-dot"></span>
+          <span id="stream-text">等待数据流</span>
+        </div>
+        <div class="status-item">
+          <span id="fps-text" style="font-family: monospace; color: var(--accent);">-- FPS</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="stats" class="hud-panel">
+      <h2>系统状态 / Pipeline Stats</h2>
+      <div class="stat-row"><span class="label">已处理 Ping</span><span class="value" id="stat-pings">0</span></div>
+      <div class="stat-row"><span class="label">已生成点云</span><span class="value" id="stat-points">0</span></div>
+      <div class="stat-row"><span class="label">缓冲区翻转</span><span class="value" id="stat-flips">0</span></div>
+      <div class="stat-row"><span class="label">队列深度</span><span class="value" id="stat-queue">0</span></div>
+      <div class="stat-row"><span class="label">最新批次 ID</span><span class="value" id="stat-batch">0</span></div>
+      <div class="stat-row"><span class="label">Ping 范围</span><span class="value" id="stat-pingrange">-</span></div>
+      <div class="stat-row"><span class="label">水深范围</span><span class="value" id="stat-depth">-</span></div>
+      <div class="stat-row" style="margin-top: 10px; padding-top: 8px; border-top: 1px dashed var(--panel-border);">
+        <span class="label">冷泉活动标识</span>
+        <span id="stat-seep"><span class="seep-indicator">监测中</span></span>
+      </div>
+    </div>
+
+    <div id="controls" class="hud-panel">
+      <h2>渲染控制 / Rendering</h2>
+      <div class="control-group">
+        <label>点大小: <span id="points-size-val">1.2</span></label>
+        <input type="range" id="points-size" min="0.3" max="5" step="0.1" value="1.2" />
+      </div>
+      <div class="control-group">
+        <label>最大点数: <span id="points-max-val">1.2M</span></label>
+        <input type="range" id="points-max" min="100000" max="3000000" step="50000" value="1200000" />
+      </div>
+      <div class="control-group">
+        <label>纵向放大系数: <span id="z-scale-val">1.0×</span></label>
+        <input type="range" id="z-scale" min="0.3" max="5" step="0.1" value="1.0" />
+      </div>
+      <div class="control-row">
+        <button id="mode-depth" class="active">深度</button>
+        <button id="mode-intensity">强度</button>
+        <button id="mode-seep">冷泉</button>
+      </div>
+      <div class="control-row">
+        <button id="view-top">俯视图</button>
+        <button id="view-iso">等轴测</button>
+        <button id="view-side">侧视图</button>
+      </div>
+      <div class="control-row">
+        <button id="toggle-axes">坐标轴</button>
+        <button id="toggle-grid">网格</button>
+        <button id="clear-points">清空</button>
+      </div>
+    </div>
+
+    <div id="svp" class="hud-panel">
+      <h2>声速剖面 / SVP</h2>
+      <canvas id="svp-canvas"></canvas>
+      <div style="margin-top: 6px; font-size: 10px; color: var(--text-dim); font-family: monospace;">
+        <span id="svp-info">等待声速剖面数据...</span>
+      </div>
+    </div>
+
+    <div id="colorbar" class="hud-panel">
+      <h2>LUT</h2>
+      <div class="colorbar-label" id="cb-max">浅</div>
+      <div id="colorbar-gradient"></div>
+      <div class="colorbar-label" id="cb-min">深</div>
+    </div>
+  </div>
+</body>
+</html>

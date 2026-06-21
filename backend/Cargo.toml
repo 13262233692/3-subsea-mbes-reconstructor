@@ -1,0 +1,34 @@
+[package]
+name = "mbes-reconstructor"
+version = "0.1.0"
+edition = "2021"
+description = "Deep-sea MBES real-time imaging workstation backend"
+
+[[bin]]
+name = "mbes-server"
+path = "src/main.rs"
+
+[dependencies]
+tokio = { version = "1.38", features = ["full"] }
+tokio-util = { version = "0.7", features = ["codec"] }
+bytes = "1.6"
+crossbeam = "0.8"
+parking_lot = "0.12"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt"] }
+futures = "0.3"
+async-trait = "0.1"
+thiserror = "1"
+byteorder = "1.5"
+chrono = { version = "0.4", features = ["serde"] }
+tokio-tungstenite = { version = "0.23", features = ["rustls-tls-native-roots"] }
+tungstenite = "0.23"
+rand = "0.8"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"
